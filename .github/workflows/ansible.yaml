@@ -1,0 +1,31 @@
+name: Validate Ansible files
+
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  TASK_VERSION: "3.33.1"
+
+jobs:
+  conftest:
+    name: Validate via personal conftest policies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Task
+        run: |
+          mkdir -p "${HOME}/.local/bin"
+          curl -sL "https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz" | tar xzf - -C "${HOME}/.local/bin" task
+      - name: Install Ansible
+        run: |
+          pip install ansible
+      - name: Install ansible-lint
+        run: |
+          pip install ansible-lint
+      - name: Validate Ansible files
+        run: |
+          task check
