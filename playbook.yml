@@ -1,0 +1,9 @@
+---
+- name: Configure RPI4
+  hosts: all
+
+  tasks:
+    - name: Update all packages to latest version.
+      ansible.builtin.import_tasks: tasks/update_packages.yml
+    - name: Ensure local DNS resolver is running.
+      ansible.builtin.import_tasks: tasks/dns_resolver.yml
