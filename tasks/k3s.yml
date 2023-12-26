@@ -1,0 +1,59 @@
+---
+#
+# Setup k3s.
+#
+# Setup and configure k3s in order to be used as a single node Kubernetes
+# cluster.
+#
+# Installation and manual upgrades follows upstream documentation at:
+#
+# - <https://docs.k3s.io/quick-start>
+# - <https://docs.k3s.io/upgrades/manual>
+#
+
+- name: Check that k3s_version is defined and is of expected format.
+  delegate_to: localhost
+  ansible.builtin.assert:
+    that:
+      - k3s_version | regex_search('v[0-9]+\.[0-9]+\.[0-9]+\+k3s[0-9]+')
+    fail_msg: >
+      Unexpected k3s version: {{ k3s_version }}.
+      k3s version should match 'v[0-9]+\.[0-9]+\.[0-9]+\+k3s[0-9]+'
+      regular expression.
+    quiet: true
+- name: Populate k3s configuration.
+  become: true
+  ansible.builtin.copy:
+    src: files/k3s-config.yaml
+    dest: /etc/rancher/k3s/config.yaml
+    owner: root
+    group: root
+    directory_mode: '0755'
+    mode: '0644'
+- name: Get k3s version, if installed.
+  become: true
+  ansible.builtin.shell:
+    executable: /bin/bash
+    cmd: |
+      set -o pipefail
+      {
+        k3s --version |
+        awk '
+          /^k3s version/ {
+            if (match($0, /v[0-9]+\.[0-9]+\.[0-9]+\+k3s[0-9]+/)) {
+              print substr($0, RSTART, RLENGTH)
+            }
+          }'
+      } || true # ignore if k3s fails and/or does not exists
+  register: k3s_version_command
+  changed_when: false
+- name: Install/upgate k3s, if needed.
+  become: true
+  ansible.builtin.shell:
+    executable: /bin/bash
+    cmd: |
+      set -o pipefail
+      curl --fail --location --silent https://get.k3s.io |
+      INSTALL_K3S_VERSION="{{ k3s_version }}" sh -s -
+  changed_when: true
+  when: k3s_version != k3s_version_command.stdout
