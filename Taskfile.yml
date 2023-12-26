@@ -1,0 +1,41 @@
+version: '3'
+
+tasks:
+  yamllint:
+    desc: Lint YAML files via `yamllint`.
+    summary: |
+      Lint YAML files via `yamllint`
+
+      Recursively run `yamllint` to lint YAML files.
+    cmds:
+      - yamllint .
+
+  syntax-check:
+    desc: Check Ansible playbooks syntax.
+    summary: |
+      Check Ansible playbooks syntax.
+
+      Recursively run `ansible-playbook --syntax-check` against YAML files.
+    cmds:
+      - "find . -type f -and -name 'playbook.yml' -exec ansible-playbook --syntax-check {} +"
+
+  ansible-lint:
+    desc: Lint Ansible playbooks via `ansible-lint`.
+    summary: |
+      Lint Ansible playbooks via `ansible-lint`.
+
+      Lint all Ansible playbooks via `ansible-lint`.
+    cmds:
+      - ansible-lint
+
+  check:
+    desc: Statically check and lint Ansible playbooks.
+    summary: |
+      Statically check and lint Ansible playbooks
+
+      Run YAML lint, check syntax and Ansible linter against all
+      Ansible playbooks.
+    cmds:
+      - task: yamllint
+      - task: syntax-check
+      - task: ansible-lint
