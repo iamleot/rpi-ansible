@@ -47,7 +47,7 @@
       } || true # ignore if k3s fails and/or does not exists
   register: k3s_version_command
   changed_when: false
-- name: Install/upgate k3s, if needed.
+- name: Install/upgrade k3s, if needed.
   become: true
   ansible.builtin.shell:
     executable: /bin/bash
