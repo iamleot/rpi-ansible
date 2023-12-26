@@ -1,0 +1,20 @@
+---
+#
+# Update all packages to latest version.
+#
+# Uses apt and update the apt cache and keep it for 3600 seconds (to possibly
+# save some bandwidth and time) and update all packages to their latest
+# version.
+#
+
+- name: Update apt cache if needed.
+  become: true
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+- name: Update all packages to latest version.
+  become: true
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+    only_upgrade: true
