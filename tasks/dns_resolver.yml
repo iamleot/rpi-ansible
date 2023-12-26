@@ -1,0 +1,41 @@
+---
+#
+# Set unbound as a local DNS resolver.
+#
+# Setup and configure unbound in order to be used as a local DNS resolver.
+#
+
+- name: Update apt cache if needed.
+  become: true
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+- name: Install unbound if needed.
+  become: true
+  ansible.builtin.apt:
+    name: unbound
+    state: present
+- name: Ensure unbound is started.
+  become: true
+  ansible.builtin.service:
+    name: unbound
+    state: started
+- name: Check resolv.conf file status.
+  become: true
+  ansible.builtin.stat:
+    path: /etc/resolv.conf
+  register: resolv_conf_stat
+- name: Remove resolv.conf if it is a link (dynamically generated).
+  become: true
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: absent
+  when: resolv_conf_stat.stat.islnk is defined and resolv_conf_stat.stat.islnk
+- name: Populate resolv.conf to use unbound.
+  become: true
+  ansible.builtin.copy:
+    src: files/resolv.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: '0644'
