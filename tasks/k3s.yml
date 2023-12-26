@@ -30,7 +30,7 @@
     group: root
     directory_mode: '0755'
     mode: '0644'
-- name: Get k3s version, if installed.
+- name: Get k3s version if installed.
   become: true
   ansible.builtin.shell:
     executable: /bin/bash
@@ -47,7 +47,7 @@
       } || true # ignore if k3s fails and/or does not exists
   register: k3s_version_command
   changed_when: false
-- name: Install/upgrade k3s, if needed.
+- name: Install/upgrade k3s if there are version mismatches.
   become: true
   ansible.builtin.shell:
     executable: /bin/bash
