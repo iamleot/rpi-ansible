@@ -2,8 +2,13 @@
 - name: Configure RPI4
   hosts: all
 
+  vars:
+    k3s_version: v1.25.4+k3s1
+
   tasks:
     - name: Update all packages to latest version.
       ansible.builtin.import_tasks: tasks/update_packages.yml
     - name: Ensure local DNS resolver is running.
       ansible.builtin.import_tasks: tasks/dns_resolver.yml
+    - name: Ensure k3s is running.
+      ansible.builtin.import_tasks: tasks/k3s.yml
