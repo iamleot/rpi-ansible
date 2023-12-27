@@ -39,3 +39,12 @@ tasks:
       - task: yamllint
       - task: syntax-check
       - task: ansible-lint
+
+  run:
+    desc: Run Ansible playbooks.
+    summary: |
+      Run Ansible playbooks.
+
+      Run the Ansible playbooks against RPI to configure it.
+    cmds:
+      - ansible-playbook --verbose playbook.yml
