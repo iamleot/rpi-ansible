@@ -10,8 +10,8 @@ env:
   TASK_VERSION: "3.33.1"
 
 jobs:
-  conftest:
-    name: Validate via personal conftest policies
+  ansible:
+    name: Validate Ansible files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
