@@ -7,3 +7,7 @@ node cluster powered by [k3s](https://k3s.io/) on latest
 
 Everything here is done just for fun, things will be likely break,
 readers beware!
+
+## See also
+
+- [rpi-flux](https://github.com/iamleot/rpi-flux)
