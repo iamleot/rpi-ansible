@@ -57,3 +57,9 @@
       INSTALL_K3S_VERSION="{{ k3s_version }}" sh -s -
   changed_when: true
   when: k3s_version != k3s_version_command.stdout
+- name: Ensure k3s is started and enabled.
+  become: true
+  ansible.builtin.service:
+    name: k3s
+    state: started
+    enabled: true
