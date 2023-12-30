@@ -15,11 +15,12 @@
   ansible.builtin.apt:
     name: unbound
     state: present
-- name: Ensure unbound is started.
+- name: Ensure unbound is started and enabled.
   become: true
   ansible.builtin.service:
     name: unbound
     state: started
+    enabled: true
 - name: Check resolv.conf file status.
   become: true
   ansible.builtin.stat:
