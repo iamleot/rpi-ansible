@@ -1,3 +1,5 @@
 ---
+flannel-backend: none
 disable: metrics-server,traefik
 disable-cloud-controller: true
+disable-network-policy: true
