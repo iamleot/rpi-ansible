@@ -3,6 +3,8 @@
   hosts: all
 
   vars:
+    # List of channels with latest versions is available at
+    # <https://update.k3s.io/v1-release/channels>.
     k3s_version: v1.26.15+k3s1
 
   tasks:
