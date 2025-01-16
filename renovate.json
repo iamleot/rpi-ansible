@@ -3,5 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "schedule": ["* 4 * * 3"]
 }
