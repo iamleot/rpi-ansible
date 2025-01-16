@@ -14,6 +14,17 @@
       ],
       "depNameTemplate": "open-policy-agent/conftest",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.github/workflows/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "TASK_VERSION:\\s+\"(?<currentValue>.*)\""
+      ],
+      "depNameTemplate": "go-task/task",
+      "datasourceTemplate": "github-releases"
     }
   ],
   "labels": ["dependencies"],
