@@ -5,7 +5,7 @@
   vars:
     # List of channels with latest versions is available at
     # <https://update.k3s.io/v1-release/channels>.
-    k3s_version: v1.30.8+k3s1
+    k3s_version: v1.31.4+k3s1
 
   tasks:
     - name: Update all packages to latest version.
