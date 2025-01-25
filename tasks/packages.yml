@@ -1,0 +1,17 @@
+---
+#
+# Install needed packages
+#
+
+- name: Update apt cache if needed.
+  become: true
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+- name: Install needed packages.
+  become: true
+  ansible.builtin.apt:
+    name:
+      - curl
+      - python3
+    state: present
