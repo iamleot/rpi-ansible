@@ -12,6 +12,8 @@
       ansible.builtin.import_tasks: tasks/update_packages.yml
     - name: Install needed packages.
       ansible.builtin.import_tasks: tasks/packages.yml
+    - name: Setup network.
+      ansible.builtin.import_tasks: tasks/network.yml
     - name: Ensure local DNS resolver is running.
       ansible.builtin.import_tasks: tasks/dns_resolver.yml
     - name: Ensure k3s is running.
