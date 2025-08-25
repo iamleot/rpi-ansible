@@ -1,0 +1,40 @@
+---
+#
+# Setup and configure WireGuard.
+#
+
+- name: Update apt cache if needed.
+  become: true
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+- name: Install WireGuard if needed.
+  become: true
+  ansible.builtin.apt:
+    name: wireguard
+    state: present
+- name: Generate WireGuard private key if needed.
+  become: true
+  ansible.builtin.shell:
+    cmd: |
+      (umask 0077; wg genkey > /etc/wireguard/wg0)
+      # remove possible old public key
+      if [ -f /etc/wireguard/wg0.pub ]; then
+        rm -f /etc/wireguard/wg0.pub
+      fi
+    creates: /etc/wireguard/wg0
+- name: Ensure WireGuard private key is readable only by root.
+  become: true
+  ansible.builtin.file:
+    path: /etc/wireguard/wg0
+    state: file
+    owner: root
+    group: root
+    mode: '0600'
+- name: Generate WireGuard public key if needed.
+  become: true
+  ansible.builtin.shell:
+    cmd: |
+      wg pubkey < /etc/wireguard/wg0 > /etc/wireguard/wg0.pub
+    creates: /etc/wireguard/wg0.pub
+# TODO: Populate /etc/network/interfaces.d/wg0
