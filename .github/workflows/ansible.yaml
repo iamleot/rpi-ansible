@@ -7,7 +7,7 @@ name: Validate Ansible files
   pull_request:
 
 env:
-  TASK_VERSION: "3.45.4"
+  TASK_VERSION: "3.45.5"
 
 jobs:
   ansible:
