@@ -13,5 +13,6 @@
   ansible.builtin.apt:
     name:
       - curl
+      - htop
       - python3
     state: present
