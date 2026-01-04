@@ -1,4 +1,5 @@
 name: Validate Ansible files
+permissions: {}
 
 'on':
   push:
