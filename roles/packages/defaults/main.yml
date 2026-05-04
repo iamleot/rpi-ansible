@@ -1,0 +1,6 @@
+---
+packages_needed_packages:
+  - curl
+  - htop
+  - python3
+packages_update: true
