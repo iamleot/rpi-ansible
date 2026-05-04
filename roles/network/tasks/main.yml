@@ -6,7 +6,7 @@
 - name: Set hostname.
   become: true
   ansible.builtin.copy:
-    src: files/hostname
+    src: hostname
     dest: /etc/hostname
     owner: root
     group: root
@@ -14,7 +14,7 @@
 - name: Setup network by populating `/etc/network`.
   become: true
   ansible.builtin.copy:
-    src: files/eth0
+    src: eth0
     dest: /etc/network/interfaces.d/eth0
     owner: root
     group: root
