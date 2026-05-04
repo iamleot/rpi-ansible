@@ -11,9 +11,8 @@
     - role: packages
     - role: network
     - role: dns_resolver
+    - role: wireguard
 
   tasks:
-    - name: Setup WireGuard.
-      ansible.builtin.import_tasks: tasks/wireguard.yml
     - name: Ensure k3s is running.
       ansible.builtin.import_tasks: tasks/k3s.yml
