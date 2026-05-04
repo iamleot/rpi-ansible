@@ -33,7 +33,7 @@
 - name: Populate k3s configuration.
   become: true
   ansible.builtin.copy:
-    src: files/k3s-config.yaml
+    src: k3s-config.yaml
     dest: /etc/rancher/k3s/config.yaml
     owner: root
     group: root
