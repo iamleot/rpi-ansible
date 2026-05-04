@@ -1,0 +1,3 @@
+---
+dns_resolver_package: "unbound"
+dns_resolver_service: "unbound"
