@@ -7,11 +7,10 @@
     # <https://update.k3s.io/v1-release/channels>.
     k3s_version: v1.33.10+k3s1
 
+  roles:
+    - role: packages
+
   tasks:
-    - name: Update all packages to latest version.
-      ansible.builtin.import_tasks: tasks/update_packages.yml
-    - name: Install needed packages.
-      ansible.builtin.import_tasks: tasks/packages.yml
     - name: Setup network.
       ansible.builtin.import_tasks: tasks/network.yml
     - name: Setup WireGuard.
