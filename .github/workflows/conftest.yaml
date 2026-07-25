@@ -8,7 +8,7 @@ permissions: {}
   pull_request:
 
 env:
-  CONFTEST_VERSION: "0.67.1"
+  CONFTEST_VERSION: "0.68.2"
 
 jobs:
   conftest:
