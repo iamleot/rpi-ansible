@@ -7,9 +7,6 @@ permissions: {}
       - main
   pull_request:
 
-env:
-  TASK_VERSION: "3.52.0"
-
 jobs:
   ansible:
     name: Validate Ansible files
@@ -17,10 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
-      - name: Install Task
-        run: |
-          mkdir -p "${HOME}/.local/bin"
-          curl -sL "https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz" | tar xzf - -C "${HOME}/.local/bin" task
       - name: Install Ansible
         run: |
           pip install ansible
@@ -29,4 +22,4 @@ jobs:
           pip install ansible-lint
       - name: Validate Ansible files
         run: |
-          task check
+          make check
