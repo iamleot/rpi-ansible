@@ -5,9 +5,7 @@ extends: default
 rules:
   document-start:
     ignore: |
-      Taskfile.yml
       .github
   line-length:
     ignore: |
-      Taskfile.yml
       .github
