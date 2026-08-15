@@ -3,9 +3,18 @@
 extends: default
 
 rules:
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  comments-indentation: false
+  comments:
+    min-spaces-from-content: 1
   document-start:
     ignore: |
       .github
   line-length:
     ignore: |
       .github
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
